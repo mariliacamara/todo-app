@@ -1,5 +1,16 @@
 <template>
   <div class="home">
+    <v-text-field
+      v-model="newTaskTitle"
+      @click:append="addTask"
+      @keyup.enter="addTask"
+      class="pa-3"
+      outlined
+      label="Add task"
+      append-icon="mdi-plus"
+      hide-details
+      clearable
+    />
     <v-list
       flat
     >
@@ -49,26 +60,20 @@ export default {
   name: 'TodoView',
   data() {
     return {
-      tasks: [
-        {
-          id: 1,
-          title: 'Wake Up',
-          done: false,
-        },
-        {
-          id: 2,
-          title: 'Get up',
-          done: false,
-        },
-        {
-          id: 3,
-          title: 'Study',
-          done: false,
-        },
-      ],
+      newTaskTitle: '',
+      tasks: [],
     };
   },
   methods: {
+    addTask() {
+      const newTask = {
+        id: Date.now(),
+        title: this.newTaskTitle,
+        done: false,
+      };
+      this.tasks.push(newTask);
+      this.newTaskTitle = '';
+    },
     doneTask(id) {
       const task = this.tasks.filter((t) => t.id === id)[0];
       task.done = !task.done;
