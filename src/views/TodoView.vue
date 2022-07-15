@@ -12,11 +12,11 @@
       clearable
     />
     <v-list
-      v-if="tasks.length"
+      v-if="$store.state.tasks.length"
       flat
     >
       <div
-        v-for="task in tasks"
+        v-for="task in $store.state.tasks"
         :key="task.id"
       >
         <v-list-item
@@ -76,17 +76,11 @@ export default {
   data() {
     return {
       newTaskTitle: '',
-      tasks: [],
     };
   },
   methods: {
     addTask() {
-      const newTask = {
-        id: Date.now(),
-        title: this.newTaskTitle,
-        done: false,
-      };
-      this.tasks.push(newTask);
+      this.$store.commit('addTask', this.newTaskTitle);
       this.newTaskTitle = '';
     },
     doneTask(id) {
