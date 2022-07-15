@@ -20,7 +20,7 @@
         :key="task.id"
       >
         <v-list-item
-          @click="doneTask(task.id)"
+          @click="$store.commit('doneTask', task.id)"
           :class="{ 'blue lighten-5': task.done }"
         >
           <template>
@@ -40,7 +40,7 @@
             </v-list-item-content>
             <v-list-item-action>
               <v-btn
-                @click.stop="deleteTask(task.id)"
+                @click.stop="$store.commit('deleteTask', task.id)"
                 icon
               >
                 <v-icon color="primary lighten-1">
@@ -82,13 +82,6 @@ export default {
     addTask() {
       this.$store.commit('addTask', this.newTaskTitle);
       this.newTaskTitle = '';
-    },
-    doneTask(id) {
-      const task = this.tasks.filter((t) => t.id === id)[0];
-      task.done = !task.done;
-    },
-    deleteTask(id) {
-      this.tasks = this.tasks.filter((t) => t.id !== id);
     },
   },
 };

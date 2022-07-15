@@ -18,6 +18,13 @@ export default new Vuex.Store({
       };
       state.tasks.push(newTask);
     },
+    doneTask(state, id) {
+      const task = state.tasks.filter((t) => t.id === id)[0];
+      task.done = !task.done;
+    },
+    deleteTask(state, id) {
+      state.tasks = state.tasks.filter((t) => t.id !== id);
+    },
   },
   actions: {
   },
