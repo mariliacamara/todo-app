@@ -2,7 +2,7 @@
   <v-snackbar
     v-model="$store.state.snackbar.show"
   >
-    {{ text }}
+    {{ $store.state.snackbar.text }}
 
     <template #action="{ attrs }">
       <v-btn
