@@ -21,7 +21,7 @@
         </v-list-item-content>
         <v-list-item-action>
           <v-btn
-            @click.stop="$store.dispatch('deleteTask', task.id)"
+            @click.stop="dialogs.delete = true"
             icon
           >
             <v-icon color="primary lighten-1">
@@ -32,11 +32,28 @@
       </template>
     </v-list-item>
     <v-divider />
+    <DeleteDialog
+      v-if="dialogs.delete"
+      @close="dialogs.delete = false"
+      :task="task"
+    />
   </div>
 </template>
 
 <script>
+import DeleteDialog from './Dialogs/DeleteDialog.vue';
+
 export default {
   props: ['task'],
+  components: {
+    DeleteDialog,
+  },
+  data() {
+    return {
+      dialogs: {
+        delete: false,
+      },
+    };
+  },
 };
 </script>
