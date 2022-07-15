@@ -12,6 +12,7 @@
       clearable
     />
     <v-list
+      v-if="tasks.length"
       flat
     >
       <div
@@ -52,6 +53,20 @@
         <v-divider />
       </div>
     </v-list>
+    <div
+      v-else
+      class="no-tasks"
+    >
+      <v-icon
+        color="primary"
+        size="80"
+      >
+        mdi-check
+      </v-icon>
+      <p class="text-h5 primary--text">
+        There's no tasks for today!
+      </p>
+    </div>
   </div>
 </template>
 
@@ -84,3 +99,13 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  .no-tasks {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
