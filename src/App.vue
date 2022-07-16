@@ -52,23 +52,18 @@
         />
       </template>
 
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
-
-      <v-app-bar-title>Todo</v-app-bar-title>
-
-      <v-spacer />
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <v-container class="pa-0">
+        <v-row>
+          <v-app-bar-nav-icon @click="drawer = !drawer" />
+          <v-spacer />
+          <SearchField />
+        </v-row>
+        <v-row>
+          <v-app-bar-title class="ml-4">
+            Todo
+          </v-app-bar-title>
+        </v-row>
+      </v-container>
     </v-app-bar>
 
     <v-main>
@@ -80,10 +75,12 @@
 
 <script>
 import SnackBar from './components/Global/SnackBar.vue';
+import SearchField from './components/Tools/SearchField.vue';
 
 export default {
   components: {
     SnackBar,
+    SearchField,
   },
   data() {
     return {

@@ -5,7 +5,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    tasks: [],
+    search: null,
+    tasks: [
+      {
+        id: 1,
+        title: 'Study',
+        done: false,
+        dueDate: '2022-07-19',
+      },
+    ],
     snackbar: {
       show: false,
       text: '',
@@ -14,11 +22,15 @@ export default new Vuex.Store({
   getters: {
   },
   mutations: {
+    setSearch(state, value) {
+      state.search = value;
+    },
     addTask(state, newTaskTitle) {
       const newTask = {
         id: Date.now(),
         title: newTaskTitle,
         done: false,
+        dueDate: null,
       };
       state.tasks.push(newTask);
     },
@@ -29,9 +41,13 @@ export default new Vuex.Store({
     deleteTask(state, id) {
       state.tasks = state.tasks.filter((t) => t.id !== id);
     },
-    updateTask(state, payload) {
+    updateTaskTitle(state, payload) {
       const task = state.tasks.filter((t) => t.id === payload.id)[0];
       task.title = payload.title;
+    },
+    updateTaskDueDate(state, payload) {
+      const task = state.tasks.filter((t) => t.id === payload.id)[0];
+      task.dueDate = payload.dueDate;
     },
     displaySnackbar(state, text) {
       let timeout = 0;
@@ -57,9 +73,13 @@ export default new Vuex.Store({
       commit('deleteTask', id);
       commit('displaySnackbar', 'Task deleted successfully');
     },
-    updateTask({ commit }, payload) {
-      commit('updateTask', payload);
+    updateTaskTitle({ commit }, payload) {
+      commit('updateTaskTitle', payload);
       commit('displaySnackbar', 'Task updated successfully');
+    },
+    updateTaskDueDate({ commit }, payload) {
+      commit('updateTaskDueDate', payload);
+      commit('displaySnackbar', 'Due date updated successfully');
     },
   },
 });
